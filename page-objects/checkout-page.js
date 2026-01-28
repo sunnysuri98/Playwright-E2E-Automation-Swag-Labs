@@ -1,3 +1,4 @@
+import { parsePrice } from "../utils/test-helper";
 import { BasePage } from "./base-page";
 import { FinalPage } from "./final-page";
 
@@ -23,7 +24,7 @@ export class CheckoutPage extends BasePage {
 
         const prices = await this.getAllTextContent(this.pricesOfAllProducts);
 
-        const floatPrices = prices.map(p => parseFloat(p.replace(/[$]/g, "")));
+        const floatPrices = prices.map(p => parsePrice(p));
 
         const total = floatPrices.reduce((acc, curr) => acc + curr, 0);
 
